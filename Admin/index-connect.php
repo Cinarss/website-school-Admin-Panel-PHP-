@@ -2,8 +2,8 @@
 include "connect.php";
 
 
-$newsReq=$db->prepare("SELECT * FROM news ");
-$newsReq->execute();
+$connectReq=$db->prepare("SELECT * FROM connect ");
+$connectReq->execute();
 
 ?>
 
@@ -85,14 +85,14 @@ $newsReq->execute();
 
                 
                <div class="container mt-5">
-                  <a href="newsAdd.php"> <button name="newsAdd" class="btn btn-success btn-lg float-end">Yeni Ekle</button></a>
+                  <a href="connectAdd.php"> <button name="connectAdd" class="btn btn-success btn-lg float-end">Yeni Ekle</button></a>
                <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
               <thead>
                 <tr>
                   <th>S. No</th>
-                  <th>Haber Zaman</th>
-                  <th>Haber Başlık</th>
-                  <th>Haber Açıklama</th>
+                  <th>Bağlantı Url</th>
+                  <th>Bağlantı Başlık</th>
+                  <th>Bağlantı Yazı</th>
                   <th></th>
                   <th></th>
                 </tr>
@@ -104,16 +104,16 @@ $newsReq->execute();
 
                 $say=0;
 
-                while($newsGet=$newsReq->fetch(PDO::FETCH_ASSOC)) { $say++; ?>
+                while($connectGet=$connectReq->fetch(PDO::FETCH_ASSOC)) { $say++; ?>
 
 
                 <tr>
                   <td width="20" ><?php echo $say; ?></td>
-                  <td><?php echo $newsGet['news_time'] ?></td>
-                  <td><?php echo $newsGet['news_title'] ?></td>
-                  <td><?php echo $newsGet['news_description'] ?></td>
-                  <td><a href="newsEdit.php?news_id=<?php echo $newsGet["news_id"]; ?>"><button class="btn btn-primary">Düzenle</button></a></td>
-                  <td> <a href="process.php?news_id=<?php echo $newsGet["news_id"]; ?>&newsDelete=ok"><button class="btn btn-danger">Sil</button></a></td>
+                  <td><?php echo $connectGet['connect_url'] ?></td>
+                  <td><?php echo $connectGet['connect_title'] ?></td>
+                  <td><?php echo $connectGet['connect_text'] ?></td>
+                  <td><a href="connect-school-edit.php?connect_id=<?php echo $connectGet["connect_id"]; ?>"><button class="btn btn-primary">Düzenle</button></a></td>
+                  <td> <a href="process.php?connect_id=<?php echo $connectGet["connect_id"]; ?>&connectDelete=ok"><button class="btn btn-danger">Sil</button></a></td>
 
                   
                 </tr>

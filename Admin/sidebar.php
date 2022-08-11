@@ -26,16 +26,10 @@
                      <li><a href="general-settings.php"><i class="fa fa-gear orange_color"></i> <span>Genel Ayarlar</span></a></li>
 
                      <li><a href="news.php"><i class="fa fa-diamond blue_color"></i> <span>Haberler</span></a></li>
-                     <li><a href="tables.html"><i class="fa fa-table purple_color2"></i> <span>Tables</span></a></li>
-                     <li>
-                        <a href="#apps" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-object-group blue2_color"></i> <span>Apps</span></a>
-                        <ul class="collapse list-unstyled" id="apps">
-                           <li><a href="email.html">> <span>Email</span></a></li>
-                           <li><a href="calendar.html">> <span>Calendar</span></a></li>
-                           <li><a href="media_gallery.html">> <span>Media Gallery</span></a></li>
-                        </ul>
-                     </li>
-                     <li><a href="price.html"><i class="fa fa-briefcase blue1_color"></i> <span>Pricing Tables</span></a></li>
+                     <li><a href="school-info.php"><i class="fa fa-table purple_color2"></i> <span>Okul Bilgileri</span></a></li>
+                     <li><a href="index-connect.php"><i class="fa fa-object-group purple_color2"></i> <span>Bağlantılar</span></a></li>
+                     
+                     <li><a href="contact.php"><i class="fa fa-map blue1_color"></i> <span>İletişim Adres</span></a></li>
                      <li>
                         <a href="contact.html">
                         <i class="fa fa-paper-plane red_color"></i> <span>Contact</span></a>

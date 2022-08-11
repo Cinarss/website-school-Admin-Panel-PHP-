@@ -10,6 +10,22 @@ $setttingsReq->execute(array(
 $settingsGet=$setttingsReq->fetch(PDO::FETCH_ASSOC);
 
 
+$newsReq=$db->prepare("SELECT * from news");
+$newsReq->execute();
+
+
+$infoReq=$db->prepare("SELECT * FROM information WHERE information_id=:id");
+$infoReq->execute(array(
+    "id" => 1
+));
+
+$infoGet=$infoReq->fetch(PDO::FETCH_ASSOC);
+
+$connect=$db->prepare("SELECT * FROM connect");
+$connect->execute();
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -38,7 +54,8 @@ $settingsGet=$setttingsReq->fetch(PDO::FETCH_ASSOC);
                 <a href="#" class="logo">
                     <img src="dim<?php echo $settingsGet["settings_image"]; ?>" alt="">
                     <span class="meb-baslik">İzmir/Buca</span>
-                    <span class="okul-baslik">Buca Necla - Tevfik Karadavut Mesleki ve Teknik Anadolu Lisesi</span>
+                    <!-- <span class="okul-baslik">Buca Necla - Tevfik Karadavut Mesleki ve Teknik Anadolu Lisesi</span> -->
+                    <span class="okul-baslik"><?php echo $settingsGet["settings_title"]; ?></span>
                 </a>
 
                 <div class="ataturk">
@@ -129,17 +146,21 @@ $settingsGet=$setttingsReq->fetch(PDO::FETCH_ASSOC);
                                 <h1 class="title">Okulumuzdan Haberler</h1>
                             </div>
                             <div class="container">
+                                <?php 
+                                    while($newsGet=$newsReq->fetch(PDO::FETCH_ASSOC)){ ?>
+                                
                                 <div class="card">
                                     <div class="item">
-                                        <a href="#"><img src="images/mesem.jpg" alt=""></a>
-                                        <p class="tarih"><i class="far fa-calendar-alt"></i>23-11-2021</p>
-                                        <a href="#" class="konu-baslik"><b>MESEM </b> öğrencilerinin dikkatine !</a>
-                                        <p class="icerik">Mesem öğrencileri için Şubat ayı sorumluluk sınav takvimi...</p>
+                                        <a href="#"><img src="<?php echo $newsGet["news_image"];?>" alt=""></a>
+                                        <p class="tarih"><i class="far fa-calendar-alt"></i><?php echo $newsGet["news_time"];?></p>
+                                        <a href="#" class="konu-baslik"><?php echo $newsGet["news_title"];?></a>
+                                        <p class="icerik"><?php echo $newsGet["news_description"];?></p>
                                         <a href="#" class="devami">Devamını Oku ></a>
                                     </div>
                                 </div>
+                                <?php } ?>
 
-                                <div class="card">
+                                <!-- <div class="card">
                                     <div class="item">
                                         <a href="#"><img src="images/sorumluluk.jpg" alt=""></a>
                                         <p class="tarih"><i class="far fa-calendar-alt"></i>23-11-2021</p>
@@ -155,7 +176,8 @@ $settingsGet=$setttingsReq->fetch(PDO::FETCH_ASSOC);
                                         <p class="tarih"><i class="far fa-calendar-alt"></i>23-11-2021</p>
                                         <p class="icerik">AR-GE Merkezimizin yaptığı ya da yapmakta olduğu projelerimiz.....</p>
                                     </div>
-                                </div>
+                                </div> -->
+
                             </div>
                         </div>
                 </div>
@@ -175,15 +197,15 @@ $settingsGet=$setttingsReq->fetch(PDO::FETCH_ASSOC);
                         
                         <li class="derslik"><img src="images/icon-derslik.png" alt="">
                             <p class="okulumuz-baslik">Derslik Sayısı</p>
-                            <p class="okulumuz-sayi">24</p>
+                            <p class="okulumuz-sayi"><?php echo $infoGet["information_derslik"]; ?></p>
                         </li>
                         <li class="ogretmen"><img src="images/icon-ogretmen.png" alt="">
                             <p class="okulumuz-baslik">Öğretmen Sayısı</p>
-                            <p class="okulumuz-sayi">67</p>
+                            <p class="okulumuz-sayi"><?php echo $infoGet["information_ogretmen"]; ?></p>
                         </li>
                         <li class="ogrenci"><img src="images/icon-ogrenci.png" alt="">
                             <p class="okulumuz-baslik">Öğrenci Sayısı</p>
-                            <p class="okulumuz-sayi">671</p>
+                            <p class="okulumuz-sayi"><?php echo $infoGet["information_ogrenci"]; ?></p>
                         </li>
                     
                     
@@ -195,15 +217,21 @@ $settingsGet=$setttingsReq->fetch(PDO::FETCH_ASSOC);
             <div class="container">
                 <h1 class="title">Bağlantılar</h1>
                 <ul class="links">
-                    <li><a href="https://e-okul.meb.gov.tr" title="e-okul Yönetim Bilgi Sistemleri Giriş Ekranı"><i class="fas fa-angle-right"></i> &nbsp;e-okul Yönetim Bilgi Sistemleri Giriş Ekranı</a></li>
-                    <li><a href="https://mebbis.meb.gov.tr" title="MEB Bilişim Sistemleri Giriş Ekranı"><i class="fas fa-angle-right"></i> &nbsp;MEB Bilişim Sistemleri Giriş Ekranı</a></li>
+                    <?php 
+                        while($connectGet=$connect->fetch(PDO::FETCH_ASSOC)){ ?>
+
+                            <li><a href="<?php echo $connectGet["connect_url"]?>" title="<?php echo $connectGet["connect_title"] ?>"><i class="fas fa-angle-right"></i> &nbsp;<?php echo $connectGet["connect_text"]; ?></a></li>
+                        
+                    
+                    <?php } ?>
+                    <!-- <li><a href="https://mebbis.meb.gov.tr" title="MEB Bilişim Sistemleri Giriş Ekranı"><i class="fas fa-angle-right"></i> &nbsp;MEB Bilişim Sistemleri Giriş Ekranı</a></li>
                     <li><a href="https://e-okul.meb.gov.tr" title="e-Okul Veli Bilgilendirme Sistemi"><i class="fas fa-angle-right"></i> &nbsp;e-Okul Veli Bilgilendirme Sistemi</a></li>
                     <li><a href="http://sgb.meb.gov.tr/www/resmi-istatistikler/icerik/64" title="Milli Eğitim Bakanlığı İstatistiki Bilgileri"><i class="fas fa-angle-right"></i> &nbsp;Milli Eğitim Bakanlığı İstatistiki Bilgileri</a></li>
                     <li><a href="http://www.meb.gov.tr/duyurular/duyurular2012/basinmus/mebim.php" title="444 0 MEB"><i class="fas fa-angle-right"></i> &nbsp;444 0 MEB</a></li>
                     <li><a href="https://www.turkiye.gov.tr" title="e-Devlet Kapısı >> www.turkiye.gov.tr"><i class="fas fa-angle-right"></i> &nbsp;e-Devlet Kapısı >> www.turkiye.gov.tr</a></li>
                     <li><a href="https://www.cimer.gov.tr" title="Cumhurbaşkanlığı İletişim Merkezi"><i class="fas fa-angle-right"></i> &nbsp;Cumhurbaşkanlığı İletişim Merkezi</a></li>
                     <li><a href="http://mebdeogren.meb.gov.tr" title="Mebde Öğren"><i class="fas fa-angle-right"></i> &nbsp;Mebde Öğren</a></li>
-                    <li><a href="http://izmir.meb.gov.tr/gocepi/" title="Geleceğin Özel Çocuklarının Eğitim Projesi"><i class="fas fa-angle-right"></i> &nbsp;Geleceğin Özel Çocuklarının Eğitim Projesi</a></li>
+                    <li><a href="http://izmir.meb.gov.tr/gocepi/" title="Geleceğin Özel Çocuklarının Eğitim Projesi"><i class="fas fa-angle-right"></i> &nbsp;Geleceğin Özel Çocuklarının Eğitim Projesi</a></li> -->
                 </ul>
             </div>
         </div>

@@ -2,8 +2,13 @@
 include "connect.php";
 
 
-$newsReq=$db->prepare("SELECT * FROM news ");
-$newsReq->execute();
+// $newsReq=$db->prepare("SELECT * from news WHERE news_id=:id");
+// $newsReq->execute(array(
+//     "id" => $_GET["news_id"]
+// ));
+
+// $newsGet=$newsReq->fetch(PDO::FETCH_ASSOC);
+
 
 ?>
 
@@ -85,48 +90,33 @@ $newsReq->execute();
 
                 
                <div class="container mt-5">
-                  <a href="newsAdd.php"> <button name="newsAdd" class="btn btn-success btn-lg float-end">Yeni Ekle</button></a>
-               <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
-              <thead>
-                <tr>
-                  <th>S. No</th>
-                  <th>Haber Zaman</th>
-                  <th>Haber Başlık</th>
-                  <th>Haber Açıklama</th>
-                  <th></th>
-                  <th></th>
-                </tr>
-              </thead>
+                <form action="process.php" method="POST" enctype="multipart/form-data" >
+              
 
-              <tbody>
+                
 
-                <?php 
+              
+                     
+               
+                     <div class="mb-3">
+                        <label for="Site Başlığı" class="form-label">Bağlantı Başlığı</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1"  name="connect_title">
+                     </div>
 
-                $say=0;
+                     <div class="mb-3">
+                        <label for="Site Açıklaması" class="form-label">Bağlantı Url</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1"  name="connect_url" >
+                     </div>
 
-                while($newsGet=$newsReq->fetch(PDO::FETCH_ASSOC)) { $say++; ?>
+                     <div class="mb-3">
+                        <label for="Site Anahtar Kelime" class="form-label">Bağlantı Yazı</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1"  name="connect_text" >
+                     </div>
 
-
-                <tr>
-                  <td width="20" ><?php echo $say; ?></td>
-                  <td><?php echo $newsGet['news_time'] ?></td>
-                  <td><?php echo $newsGet['news_title'] ?></td>
-                  <td><?php echo $newsGet['news_description'] ?></td>
-                  <td><a href="newsEdit.php?news_id=<?php echo $newsGet["news_id"]; ?>"><button class="btn btn-primary">Düzenle</button></a></td>
-                  <td> <a href="process.php?news_id=<?php echo $newsGet["news_id"]; ?>&newsDelete=ok"><button class="btn btn-danger">Sil</button></a></td>
-
-                  
-                </tr>
-
-
-
-                <?php  }
-
-                ?>
-
-
-              </tbody>
-            </table> 
+                     
+                     <button class="mb-3 btn btn-success btn-lg" name="connectAdd">Kaydet</button>
+                     </div>
+            </form>
 
                <!-- dashboard inner -->
 

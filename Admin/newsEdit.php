@@ -96,7 +96,7 @@ $newsGet=$newsReq->fetch(PDO::FETCH_ASSOC);
                <?php 
                     if (strlen($newsGet['news_image'])>0) {?>
 
-                    <img width="200"  src="../dimg/<?php echo $newsGet['news_image']; ?>">
+                    <img width="200"  src="../<?php echo $newsGet['news_image']; ?>">
 
                     <?php } else {?>
 
@@ -127,22 +127,22 @@ $newsGet=$newsReq->fetch(PDO::FETCH_ASSOC);
                
                      <div class="mb-3">
                         <label for="Site Başlığı" class="form-label">Haber Başlığı</label>
-                        <input type="text" class="form-control" id="exampleFormControlInput1" value="<?php echo $newsGet["news_title"]; ?>" name="news_title" placeholder="Site Başlığı">
+                        <input type="text" class="form-control" id="exampleFormControlInput1" value="<?php echo $newsGet["news_title"]; ?>" name="news_title" placeholder="Haber Başlık">
                      </div>
 
                      <div class="mb-3">
                         <label for="Site Açıklaması" class="form-label">Haber Açıklaması</label>
-                        <input type="text" class="form-control" id="exampleFormControlInput1" value="<?php echo $newsGet["news_description"]; ?>" name="news_description" placeholder="Site Açıklaması">
+                        <input type="text" class="form-control" id="exampleFormControlInput1" value="<?php echo $newsGet["news_description"]; ?>" name="news_description" placeholder="Haber Açıklama">
                      </div>
 
                      <div class="mb-3">
                         <label for="Site Anahtar Kelime" class="form-label">Haber Seourl</label>
-                        <input type="text" class="form-control" id="exampleFormControlInput1" value="<?php echo $newsGet["news_seourl"]; ?>" name="news_seourl" placeholder="Site Anahtar Kelime">
+                        <input type="text" class="form-control" id="exampleFormControlInput1" value="<?php echo $newsGet["news_seourl"]; ?>" name="news_seourl" placeholder="Haber Seourl">
                      </div>
 
                      <div class="mb-3">
                         <label for="Site Yazar" class="form-label">Haber Zaman</label>
-                        <input type="text" class="form-control" id="exampleFormControlInput1" value="<?php echo $newsGet["news_time"]; ?>" name="news_time" placeholder="Site Yazar">
+                        <input type="text" class="form-control" disabled="" id="exampleFormControlInput1" value="<?php echo $newsGet["news_time"]; ?>" name="news_time" >
                      </div>
                      <button class="mb-3 btn btn-primary" name="newsUpdate">Güncelle</button>
                      </div>

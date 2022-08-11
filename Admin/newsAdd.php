@@ -2,8 +2,13 @@
 include "connect.php";
 
 
-$newsReq=$db->prepare("SELECT * FROM news ");
-$newsReq->execute();
+// $newsReq=$db->prepare("SELECT * from news WHERE news_id=:id");
+// $newsReq->execute(array(
+//     "id" => $_GET["news_id"]
+// ));
+
+// $newsGet=$newsReq->fetch(PDO::FETCH_ASSOC);
+
 
 ?>
 
@@ -85,48 +90,36 @@ $newsReq->execute();
 
                 
                <div class="container mt-5">
-                  <a href="newsAdd.php"> <button name="newsAdd" class="btn btn-success btn-lg float-end">Yeni Ekle</button></a>
-               <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
-              <thead>
-                <tr>
-                  <th>S. No</th>
-                  <th>Haber Zaman</th>
-                  <th>Haber Başlık</th>
-                  <th>Haber Açıklama</th>
-                  <th></th>
-                  <th></th>
-                </tr>
-              </thead>
+                <form action="process.php" method="POST" enctype="multipart/form-data" >
+              
 
-              <tbody>
+                
 
-                <?php 
+              
+                     <div class="mb-3">
+                        <label for="Site Başlığı" class="form-label">Resim Seç</label>
+                        <input type="file" class="form-control" id="exampleFormControlInput1"  name="news_image" >
+                     </div>
+               
+                     <div class="mb-3">
+                        <label for="Site Başlığı" class="form-label">Haber Başlığı</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1"  name="news_title">
+                     </div>
 
-                $say=0;
+                     <div class="mb-3">
+                        <label for="Site Açıklaması" class="form-label">Haber Açıklaması</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1"  name="news_description" >
+                     </div>
 
-                while($newsGet=$newsReq->fetch(PDO::FETCH_ASSOC)) { $say++; ?>
+                     <div class="mb-3">
+                        <label for="Site Anahtar Kelime" class="form-label">Haber Seourl</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1"  name="news_seourl" >
+                     </div>
 
-
-                <tr>
-                  <td width="20" ><?php echo $say; ?></td>
-                  <td><?php echo $newsGet['news_time'] ?></td>
-                  <td><?php echo $newsGet['news_title'] ?></td>
-                  <td><?php echo $newsGet['news_description'] ?></td>
-                  <td><a href="newsEdit.php?news_id=<?php echo $newsGet["news_id"]; ?>"><button class="btn btn-primary">Düzenle</button></a></td>
-                  <td> <a href="process.php?news_id=<?php echo $newsGet["news_id"]; ?>&newsDelete=ok"><button class="btn btn-danger">Sil</button></a></td>
-
-                  
-                </tr>
-
-
-
-                <?php  }
-
-                ?>
-
-
-              </tbody>
-            </table> 
+                     
+                     <button class="mb-3 btn btn-success btn-lg" name="newsAdd">Kaydet</button>
+                     </div>
+            </form>
 
                <!-- dashboard inner -->
 
