@@ -1,4 +1,11 @@
+<?php
+include "connect.php";
 
+
+$idariReq=$db->prepare("SELECT * FROM idari ");
+$idariReq->execute();
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -65,7 +72,7 @@
                                        <a class="dropdown-item" href="profile.html">My Profile</a>
                                        <a class="dropdown-item" href="settings.html">Settings</a>
                                        <a class="dropdown-item" href="help.html">Help</a>
-                                       <a class="dropdown-item" href="logout.php"><span>Log Out</span> <i class="fa fa-sign-out"></i></a>
+                                       <a class="dropdown-item" href="#"><span>Log Out</span> <i class="fa fa-sign-out"></i></a>
                                     </div>
                                  </li>
                               </ul>
@@ -75,12 +82,54 @@
                   </nav>
                </div>
                <!-- end topbar -->
+
+                
+               <div class="container mt-5">
+                  <a href="idariAdd.php"> <button name="idariAdd" class="btn btn-success btn-lg float-end">Yeni Ekle</button></a>
+               <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+              <thead>
+                <tr>
+                  <th>S. No</th>
+                  <th>isim</th>
+                  <th>Yetki</th>
+                  <th></th>
+                  <th></th>
+                </tr>
+              </thead>
+
+              <tbody>
+
+                <?php 
+
+                $say=0;
+
+                while($idariGet=$idariReq->fetch(PDO::FETCH_ASSOC)) { $say++; ?>
+
+
+                <tr>
+                  <td width="20" ><?php echo $say; ?></td>
+                  <td><?php echo $idariGet['idari_name'] ?></td>
+                  <td><?php echo $idariGet['idari_yetki'] ?></td>
+                  <td><a href="idariEdit.php?idari_id=<?php echo $idariGet["idari_id"]; ?>"><button class="btn btn-primary">Düzenle</button></a></td>
+                  <td> <a href="process.php?idari_id=<?php echo $idariGet["idari_id"]; ?>&idariDelete=ok"><button class="btn btn-danger">Sil</button></a></td>
+
+                  
+                </tr>
+
+
+
+                <?php  }
+
+                ?>
+
+
+              </tbody>
+            </table> 
+
                <!-- dashboard inner -->
-               
-               <!-- end dashboard inner -->
-            </div>
-         </div>
-      </div>
+
+
+
       <!-- jQuery -->
       <script src="js/jquery.min.js"></script>
       <script src="js/popper.min.js"></script>
@@ -102,7 +151,7 @@
          var ps = new PerfectScrollbar('#sidebar');
       </script>
       <!-- custom js -->
-      <script src="js/custom.js"></script>
       <script src="js/chart_custom_style1.js"></script>
+      <script src="js/custom.js"></script>
    </body>
 </html>

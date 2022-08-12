@@ -1,3 +1,25 @@
+<?php
+ob_start();
+session_start();
+
+include "connect.php";
+
+$adminReq=$db->prepare("SELECT * FROM admin WHERE admin_username=:username");
+$adminReq->execute(array(
+   "username" => $_SESSION["admin_username"]
+));
+
+$say=$adminReq->rowCount();
+$adminGet=$adminReq->fetch(PDO::FETCH_ASSOC);
+
+if($say==0){
+   Header("Location:login.php?access=no");
+}
+
+
+?>
+
+
 <nav id="sidebar">
                <div class="sidebar_blog_1">
                   <div class="sidebar-header">
@@ -31,27 +53,11 @@
                      
                      <li><a href="contact.php"><i class="fa fa-map blue1_color"></i> <span>İletişim Adres</span></a></li>
                      <li>
-                        <a href="contact.html">
-                        <i class="fa fa-paper-plane red_color"></i> <span>Contact</span></a>
+                        <a href="idari.php">
+                        <i class="fa fa-paper-plane red_color"></i> <span>İdari Kadro Ayarlar</span></a>
                      </li>
-                     <li class="active">
-                        <a href="#additional_page" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-clone yellow_color"></i> <span>Additional Pages</span></a>
-                        <ul class="collapse list-unstyled" id="additional_page">
-                           <li>
-                              <a href="profile.html">> <span>Profile</span></a>
-                           </li>
-                           <li>
-                              <a href="project.html">> <span>Projects</span></a>
-                           </li>
-                           <li>
-                              <a href="login.html">> <span>Login</span></a>
-                           </li>
-                           <li>
-                              <a href="404_error.html">> <span>404 Error</span></a>
-                           </li>
-                        </ul>
-                     </li>
-                     <li><a href="map.html"><i class="fa fa-map purple_color2"></i> <span>Map</span></a></li>
+                     
+                     <li><a href="teachers.php"><i class="fa fa-clone yellow_color"></i> <span>Öğretmenler</span></a></li>
                      <li><a href="charts.html"><i class="fa fa-bar-chart-o green_color"></i> <span>Charts</span></a></li>
                      <li><a href="settings.html"><i class="fa fa-cog yellow_color"></i> <span>Settings</span></a></li>
                   </ul>

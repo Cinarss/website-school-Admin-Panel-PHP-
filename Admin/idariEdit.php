@@ -1,3 +1,17 @@
+<?php
+include "connect.php";
+
+
+$idariReq=$db->prepare("SELECT * from idari WHERE idari_id=:id");
+$idariReq->execute(array(
+    "id" => $_GET["idari_id"]
+));
+
+$idariGet=$idariReq->fetch(PDO::FETCH_ASSOC);
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
    <head>
@@ -37,7 +51,7 @@
       <div class="full_container">
          <div class="inner_container">
             <!-- Sidebar  -->
-            <?php include  "sidebar.php"; ?>
+            <?php include "sidebar.php"; ?>
             <!-- end sidebar -->
             <!-- right content -->
             <div id="content">
@@ -73,12 +87,36 @@
                   </nav>
                </div>
                <!-- end topbar -->
-               <!-- dashboard inner -->
+
+                
+               <div class="container mt-5">
+                <form action="process.php" method="POST" enctype="multipart/form-data" >
                
-               <!-- end dashboard inner -->
-            </div>
-         </div>
-      </div>
+                <input type="hidden" name="idari_id" value="<?php echo $idariGet['idari_id']; ?>">
+
+                     <div class="mb-3">
+                        <label for="Site Başlığı" class="form-label">İsim</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1" value="<?php echo $idariGet["idari_name"]; ?>" name="idari_name" placeholder="İsim">
+                     </div>
+
+                     <div class="mb-3">
+                        <label for="Site Açıklaması" class="form-label">Yetki (Müdür Yard. , Müdür, vs...)</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1" value="<?php echo $idariGet["idari_yetki"]; ?>" name="idari_yetki" placeholder="Yetki (Müdür Yard. , Müdür, vs...)">
+                     </div>
+
+
+                     <div class="mb-3">
+                        <label for="Site Yazar" class="form-label">İdari Kayıt Zaman</label>
+                        <input type="text" class="form-control" disabled="" id="exampleFormControlInput1" value="<?php echo $idariGet["idari_time"]; ?>" name="idari_time" >
+                     </div>
+                     <button class="mb-3 btn btn-primary" name="idariUpdate">Güncelle</button>
+                     </div>
+            </form>
+
+               <!-- dashboard inner -->
+
+
+
       <!-- jQuery -->
       <script src="js/jquery.min.js"></script>
       <script src="js/popper.min.js"></script>

@@ -1,4 +1,23 @@
+<?php
+include "connect.php";
 
+
+// $newsReq=$db->prepare("SELECT * from news WHERE news_id=:id");
+// $newsReq->execute(array(
+//     "id" => $_GET["news_id"]
+// ));
+
+// $newsGet=$newsReq->fetch(PDO::FETCH_ASSOC);
+
+
+$teachReq=$db->prepare("SELECT * from teacher WHERE teacher_id=:id");
+$teachReq->execute(array(
+    "id" => $_GET["teacher_id"]
+));
+
+$teachGet=$teachReq->fetch(PDO::FETCH_ASSOC);
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -65,7 +84,7 @@
                                        <a class="dropdown-item" href="profile.html">My Profile</a>
                                        <a class="dropdown-item" href="settings.html">Settings</a>
                                        <a class="dropdown-item" href="help.html">Help</a>
-                                       <a class="dropdown-item" href="logout.php"><span>Log Out</span> <i class="fa fa-sign-out"></i></a>
+                                       <a class="dropdown-item" href="#"><span>Log Out</span> <i class="fa fa-sign-out"></i></a>
                                     </div>
                                  </li>
                               </ul>
@@ -75,12 +94,61 @@
                   </nav>
                </div>
                <!-- end topbar -->
+
+                
+               <div class="container mt-5">
+                <form action="process.php" method="POST" enctype="multipart/form-data" >
+              
+
+
+              
+                    
+                     <div class="mb-3">
+                        <label for="Site Başlığı" class="form-label">İsim</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1"  value="<?php echo $teachGet["teacher_name"] ?>" name="teacher_name">
+                     </div>
+
+                     <div class="mb-3">
+                        <label for="Site Açıklaması" class="form-label">Yetki (Müdür Yard. , Müdür, vs...)</label>
+                        <?php  
+
+                    $teacher_id = $teachGet["teach_id"];
+
+                  $teacherReq=$db->prepare("SELECT * from teachkategori WHERE teacher_ust=:teacher_ust");
+                  $teacherReq->execute(array(
+                    "teacher_ust" => 0
+                  ));
+
+                    ?>
+                    <select class="select2_multiple form-control" required="" name="teach_id" >
+
+
+                     <?php 
+
+                     while($teacherGet=$teacherReq->fetch(PDO::FETCH_ASSOC)) {
+
+                       $teach_id =$teacherGet['teach_id'];
+
+                       ?>
+
+                       <option <?php if ($teach_id==$teacher_id) { echo "selected='select'"; } ?> value="<?php echo $teacherGet['teach_id']; ?>"><?php echo $teacherGet['teach_ad']; ?></option>
+
+                       <?php } ?>
+
+                     </select>
+                     </div>
+
+                    
+
+                     
+                     <button class="mb-3 btn btn-success btn-lg" name="teacherUpdate">Kaydet</button>
+                     </div>
+            </form>
+
                <!-- dashboard inner -->
-               
-               <!-- end dashboard inner -->
-            </div>
-         </div>
-      </div>
+
+
+
       <!-- jQuery -->
       <script src="js/jquery.min.js"></script>
       <script src="js/popper.min.js"></script>
@@ -102,7 +170,7 @@
          var ps = new PerfectScrollbar('#sidebar');
       </script>
       <!-- custom js -->
-      <script src="js/custom.js"></script>
       <script src="js/chart_custom_style1.js"></script>
+      <script src="js/custom.js"></script>
    </body>
 </html>

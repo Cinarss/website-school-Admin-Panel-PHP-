@@ -1,3 +1,13 @@
+<?php 
+include "../Admin/connect.php";
+
+
+$idariReq=$db->prepare("SELECT  * FROM idari ");
+$idariReq->execute();
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -105,12 +115,23 @@
                 </ul>
 
                 <ul class="yardimcilar">
-                    <li><a href="">&nbsp; &nbsp; İsmet ASLAN <br> <span> Müdür Baş Yardımcısı</span></a></li>
-                    <li><a href="">&nbsp; Sibel SEVİNÇ <br> <span> Müdür Yardımcısı</span></a></li>
+                    <?php
+                    while($idariGet=$idariReq->fetch(PDO::FETCH_ASSOC)) { ?>
+
+                    <li><a href="">&nbsp; &nbsp; <?php echo $idariGet["idari_name"]?> <br> <span> <?php echo $idariGet["idari_yetki"]; ?></span></a></li>
+                    <?php }?>
+                    
+                    
+                    
+
+
+
+
+                    <!-- <li><a href="">&nbsp; Sibel SEVİNÇ <br> <span> Müdür Yardımcısı</span></a></li>
                     <li><a href="">&nbsp; Özlem GÜNDÜZ <br> <span> Müdür Yardımcısı</span></a></li>
                     <li><a href="">&nbsp; Ebubekir YETKİN <br> <span> Müdür Yardımcısı</span></a></li>
                     <li><a href="">&nbsp; Nail CANBAY <br> <span> Müdür Yardımcısı</span></a></li>
-                    <li><a href="">&nbsp; Hüseyin KAYHAN <br> <span> Müdür Yardımcısı</span></a></li>
+                    <li><a href="">&nbsp; Hüseyin KAYHAN <br> <span> Müdür Yardımcısı</span></a></li> -->
                 </ul>
             </div>
         </div>

@@ -1,7 +1,37 @@
 <?php
+ob_start();
+session_start();
 
 include "connect.php";
 include "function.php";
+
+ /*Admin Giriş */
+
+  if(isset($_POST["adminLogin"])){
+    $admin_username = $_POST["admin_username"];
+    $admin_password = $_POST["admin_password"];
+
+    $admin=$db->prepare("SELECT * FROM admin where admin_username=:username and admin_password=:password ");
+    $admin->execute(array(
+      "username" => $admin_username,
+      "password" => $admin_password
+    ));
+
+    $say = $admin->rowCount();
+
+    if($say==1){
+      $_SESSION["admin_username"] = $admin_username;
+      Header("Location:index.php?access=okay");
+
+    }else{
+      Header("Location:login.php?access=no");
+      
+    }
+
+  }
+
+
+    /*------------------------------------------------------------------------ */
 
 /* Genel Ayar Düzenleme */
 
@@ -326,6 +356,10 @@ if(isset($_POST["newsUpdate"])){
     }
 
 
+
+    /*İletşiim Güncelleme */
+
+    /*------------------------------------------------------------------------ */
     if(isset($_POST["contactUpdate"])){
 
       $contact=$db->prepare("UPDATE contact SET
@@ -348,15 +382,168 @@ if(isset($_POST["newsUpdate"])){
         Header("Location:contact.php?status=no");
         exit;
       }
-
-
-
-
       
+    }
+
+ /*------------------------------------------------------------------------ */
+
+  /*İdari Kadro Ekleme */
+
+    if(isset($_POST["idariAdd"])){
+
+      $idari=$db->prepare("INSERT into idari set
+        idari_name=:idari_name,
+        idari_yetki=:idari_yetki
+      ");
+
+      $insert=$idari->execute(array(
+        "idari_name" => $_POST["idari_name"],
+        "idari_yetki" => $_POST["idari_yetki"]
+      ));
+
+      if($insert){
+        Header("Location:idari.php?status=okay");
+        exit;
+
+      }else{
+        Header("Location:idariAdd.php?status=no");
+
+      }
+
+    }
+
+
+     /*------------------------------------------------------------------------ */
+     /*İdari Kadro Silme */
+
+    if($_GET["idariDelete"] == "ok"){
+      $delete=$db->prepare("DELETE FROM idari where idari_id=:id");
+      $control=$delete->execute(array(
+        "id" => $_GET["idari_id"]
+      ));
+
+      if($control){
+        Header("Location:idari.php?delete=okay");
+        exit;
+
+      }else{
+        Header("Location:idari.php?delete=no");
+        exit;
+      }
+
+    }
+
+ /*------------------------------------------------------------------------ */
+/*İdari Kadro Güncelleme */
+
+
+
+    if(isset($_POST["idariUpdate"])){
+      $idari_id = $_POST["idari_id"];
+
+      $idari=$db->prepare("UPDATE idari SET
+
+      idari_name=:idari_name,
+      idari_yetki=:idari_yetki
+
+      WHERE idari_id = {$_POST["idari_id"]} ");
+
+      $update=$idari->execute(array(
+        "idari_name" => $_POST["idari_name"],
+        "idari_yetki" => $_POST["idari_yetki"]
+      ));
+
+      if($update){
+        Header("Location:idariEdit.php?idari_id=$idari_id?status=okay");
+        exit;
+
+      }else{
+        Header("Location:idariEdit.php?idari_id=$idari_id?status=no");
+        exit;
+
+      }
+
     }
 
 
 
+
+     /*------------------------------------------------------------------------ */
+
+     /*Öğretmen Ekleme */
+
+    if(isset($_POST["teacherAdd"])){
+
+      $teach=$db->prepare("INSERT INTO teacher SET
+        teacher_name=:teacher_name,
+        teach_id=:teach_id
+      ");
+
+      $insert=$teach->execute(array(
+        "teacher_name" => $_POST["teacher_name"],
+        "teach_id" => $_POST["teach_id"]
+      ));
+
+      if($insert){
+        Header("Location:teachers.php?status=okay");
+        exit;
+
+      }else{
+        Header("Location:teachers.php?status=no");
+        exit;
+      }
+    }
+
+
+
+
+     /*------------------------------------------------------------------------ */
+
+     /*Öğretmen Silme */
+
+     if($_GET["teacherDelete"]== "ok"){
+      $teach=$db->prepare("DELETE FROM teacher WHERE teacher_id=:id");
+      $control=$teach->execute(array(
+        "id" => $_GET["teacher_id"]
+      ));
+
+      if($control){
+        Header("Location:teachers.php?status=okay");
+        exit;
+
+      }else{
+        Header("Location:teachers.php?status=no");
+
+      }
+     }
+
+
+     /*------------------------------------------------------------------------ */
+     /*Öğretmen Güncelleme */
+
+     if(isset($_POST["teacherUpdate"])){
+      $teacher_id=$_POST["teacher_id"];
+
+      $teach=$db->prepare("UPDATE teacher set
+      teacher_name=:teacher_name,
+      teach_id=:teach_id
+      WHERE teacher_id = {$_POST["teacher_id"]} ");
+
+      $update=$teach->execute(array(
+        "teacher_name" => $_POST["teacher_name"],
+        "teach_id" => $_POST["teach_id"]
+      ));
+
+      if($update){
+        Header("Location:teacherEdit.php?teacher_id=$teacher_id?status=okay");
+        exit;
+
+      }else{
+        Header("Location:teacherEdit.php?teacher_id=$teacher_id?status=no");
+        exit;
+      }
+
+     }
 
 ?>
 

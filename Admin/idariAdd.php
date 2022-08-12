@@ -1,4 +1,16 @@
+<?php
+include "connect.php";
 
+
+// $newsReq=$db->prepare("SELECT * from news WHERE news_id=:id");
+// $newsReq->execute(array(
+//     "id" => $_GET["news_id"]
+// ));
+
+// $newsGet=$newsReq->fetch(PDO::FETCH_ASSOC);
+
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -65,7 +77,7 @@
                                        <a class="dropdown-item" href="profile.html">My Profile</a>
                                        <a class="dropdown-item" href="settings.html">Settings</a>
                                        <a class="dropdown-item" href="help.html">Help</a>
-                                       <a class="dropdown-item" href="logout.php"><span>Log Out</span> <i class="fa fa-sign-out"></i></a>
+                                       <a class="dropdown-item" href="#"><span>Log Out</span> <i class="fa fa-sign-out"></i></a>
                                     </div>
                                  </li>
                               </ul>
@@ -75,12 +87,36 @@
                   </nav>
                </div>
                <!-- end topbar -->
+
+                
+               <div class="container mt-5">
+                <form action="process.php" method="POST" enctype="multipart/form-data" >
+              
+
+
+              
+                    
+                     <div class="mb-3">
+                        <label for="Site Başlığı" class="form-label">İsim</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1"  name="idari_name">
+                     </div>
+
+                     <div class="mb-3">
+                        <label for="Site Açıklaması" class="form-label">Yetki (Müdür Yard. , Müdür, vs...)</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1"  name="idari_yetki" >
+                     </div>
+
+                    
+
+                     
+                     <button class="mb-3 btn btn-success btn-lg" name="idariAdd">Kaydet</button>
+                     </div>
+            </form>
+
                <!-- dashboard inner -->
-               
-               <!-- end dashboard inner -->
-            </div>
-         </div>
-      </div>
+
+
+
       <!-- jQuery -->
       <script src="js/jquery.min.js"></script>
       <script src="js/popper.min.js"></script>
@@ -102,7 +138,7 @@
          var ps = new PerfectScrollbar('#sidebar');
       </script>
       <!-- custom js -->
-      <script src="js/custom.js"></script>
       <script src="js/chart_custom_style1.js"></script>
+      <script src="js/custom.js"></script>
    </body>
 </html>
