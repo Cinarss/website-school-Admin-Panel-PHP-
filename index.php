@@ -24,6 +24,13 @@ $infoGet=$infoReq->fetch(PDO::FETCH_ASSOC);
 $connect=$db->prepare("SELECT * FROM connect");
 $connect->execute();
 
+$contact=$db->prepare("SELECT * FROM contact WHERE contact_id=:id");
+$contact->execute(array(
+    "id" => 1
+));
+
+$contactGet=$contact->fetch(PDO::FETCH_ASSOC);
+
 
 
 ?>
@@ -246,7 +253,7 @@ $connect->execute();
                     <p><strong>Adres:</strong></p>
                     <br>
 
-					İnönü Mahallesi 677/5. Sk. No58 35380 Buca/İzmir, Türkiye
+					<?php echo $contactGet["contact_adres"]; ?>
 
                     <br>
                     <br>
@@ -254,14 +261,14 @@ $connect->execute();
                     <strong>Telefon</strong>
                     <br>
 
-					0 (232) 260 10 60
+					<?php echo $contactGet["contact_tel"]; ?>
 
                     <br>
                     <br>
 
                 </div>
                     <div class="map">
-                        <div class="konum"><a href="https://goo.gl/maps/UFzqJ4P1bChndR6k9"><img src="images/footer-map.png" alt=""></a></div>
+                        <div class="konum"><a href="<?php echo $contactGet["contact_url"] ?>"><img src="images/footer-map.png" alt=""></a></div>
                     </div>
                     <div class="eposta">
                         

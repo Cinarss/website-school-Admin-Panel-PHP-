@@ -326,6 +326,36 @@ if(isset($_POST["newsUpdate"])){
     }
 
 
+    if(isset($_POST["contactUpdate"])){
+
+      $contact=$db->prepare("UPDATE contact SET
+      contact_adres=:contact_adres,
+      contact_tel=:contact_tel,
+      contact_url=:contact_url
+      WHERE contact_id=1");
+
+      $update=$contact->execute(array(
+        "contact_adres" => $_POST["contact_adres"],
+        "contact_tel" => $_POST["contact_tel"],
+        "contact_url" => $_POST["contact_url"]
+      ));
+
+      if($update){
+        Header("Location:contact.php?status=ok");
+        exit;
+
+      }else{
+        Header("Location:contact.php?status=no");
+        exit;
+      }
+
+
+
+
+      
+    }
+
+
 
 
 ?>

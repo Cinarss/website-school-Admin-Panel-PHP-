@@ -2,7 +2,7 @@
 
 
 include "connect.php";
-include "contacy.php";
+
 
 
 $contactReq=$db->prepare("SELECT * from contact WHERE contact_id=:id");
