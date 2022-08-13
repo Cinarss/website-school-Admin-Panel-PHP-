@@ -1,4 +1,7 @@
 <?php
+ob_start();
+session_start();
+
 include "Admin/connect.php";
 
 
@@ -152,11 +155,11 @@ $connect->execute();
                                 
                                 <div class="card">
                                     <div class="item">
-                                        <a href="#"><img src="<?php echo $newsGet["news_image"];?>" alt=""></a>
+                                        <a href="Admin/haber-<?php echo $newsGet["news_seourl"];?>"><img src="<?php echo $newsGet["news_image"];?>" alt=""></a>
                                         <p class="tarih"><i class="far fa-calendar-alt"></i><?php echo $newsGet["news_time"];?></p>
-                                        <a href="#" class="konu-baslik"><?php echo $newsGet["news_title"];?></a>
+                                        <a href="Admin/haber-<?php echo $newsGet["news_seourl"];?>" class="konu-baslik"><?php echo $newsGet["news_title"];?></a>
                                         <p class="icerik"><?php echo $newsGet["news_description"];?></p>
-                                        <a href="#" class="devami">Devamını Oku ></a>
+                                        <a href="Admin/haber-<?php echo $newsGet["news_seourl"];?>" class="devami">Devamını Oku ></a>
                                     </div>
                                 </div>
                                 <?php } ?>

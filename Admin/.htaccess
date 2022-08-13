@@ -6,4 +6,4 @@ RewriteRule ^(.*)$ $1.php
 
 
 
-RewriteRule ^sayfa-([0-9a-zA-Z-_]+)  blogDetay.php?sef=$1 [L,QSA]
+RewriteRule ^haber-([0-9a-zA-Z-_]+)  newsDetay.php?sef=$1 [L,QSA]

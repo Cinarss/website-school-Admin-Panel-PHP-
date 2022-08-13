@@ -457,17 +457,7 @@ a{
     
 }
 
-.header-tarihce .header-container .container{
-    margin: 4rem 8rem 3rem 8rem;
-    font-size: 1rem;
-    display: grid;
-    grid-template-rows: repeat(5,1fr);
-    opacity: .7;
-}
 
-.header-tarihce .baslik{
-    color: #4d4d4d;
-}
 
 
 .header-okulumuz .header-container .container .baslik{
@@ -1303,3 +1293,30 @@ table{
     color: #fff;
     font-size: 1.5rem;   
 }
+
+
+
+.header-haber{
+    margin: 5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.header-haber .title{
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.header-haber .haber-aciklama{
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.header-haber .image-haber{
+    text-align: center;
+    
+}
+
+
+

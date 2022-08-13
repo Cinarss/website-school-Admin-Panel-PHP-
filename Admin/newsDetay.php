@@ -1,3 +1,18 @@
+<?php
+ob_start();
+session_start();
+include "connect.php";
+
+
+
+$habersor=$db->prepare("SELECT * FROM news where news_seourl=:sef ");
+$habersor->execute(array(
+    "sef" => $_GET["sef"]
+));
+
+$habercek=$habersor->fetch(PDO::FETCH_ASSOC);
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -95,15 +110,22 @@
         </div>
     </nav>
 
-      
-    <div class="header-mudur">
-        <div class="header-container">
-            <div class="container">
-                <div class="image"><img src="/images/" alt=""></div>
-                <h1 class="baslik">Haci Murat ÖZKILINÇ - Okul Müdürü</h1>
+        <div class="header-haber">
+            <div class="container-header-haber">
+                <div class="container-haber">
+                    <h1 class="title"><?php echo $habercek["news_title"]; ?></h1>
+                    <div class="haber-aciklama">
+                        <p> <?php echo $habercek["news_description"]; ?> </p>
+                    </div>
+
+                    <div class="image-haber">
+                        <img src="../<?php echo $habercek["news_image"]; ?>">
+                    </div>
+                    
+                </div>
             </div>
         </div>
-    </div>
+    
 
 
         <div class="footer">
@@ -142,8 +164,8 @@
                 <div class="footer-info">
                     MEB © - Tüm Hakları Saklıdır. Gizlilik, Kullanım ve Telif Hakları bildiriminde belirtilen kurallar çerçevesinde hizmet sunulmaktadır.
                 </div>
+    
                 <script src="../app.js" charset="utf-8"></script>
-
 
 </body>
 </html>
