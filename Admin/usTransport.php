@@ -2,12 +2,12 @@
 include "connect.php";
 
 
-// $newsReq=$db->prepare("SELECT * from news WHERE news_id=:id");
-// $newsReq->execute(array(
-//     "id" => $_GET["news_id"]
-// ));
+$transportReq=$db->prepare("SELECT * from ustransport WHERE transport_id=:id");
+$transportReq->execute(array(
+    "id" => 1
+));
 
-// $newsGet=$newsReq->fetch(PDO::FETCH_ASSOC);
+$transportGet=$transportReq->fetch(PDO::FETCH_ASSOC);
 
 
 ?>
@@ -91,50 +91,29 @@ include "connect.php";
                 
                <div class="container mt-5">
                 <form action="process.php" method="POST" enctype="multipart/form-data" >
-              
-
-
-              
-                    
+       
                      <div class="mb-3">
-                        <label for="Site Başlığı" class="form-label">İsim</label>
-                        <input type="text" class="form-control" id="exampleFormControlInput1"  name="teacher_name">
+                        <label for="Site Başlığı" class="form-label">Yerleşim Yeri</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1" value="<?php echo $transportGet["yerlesim"]; ?>" name="yerlesim" placeholder="Yerleşim Yeri">
                      </div>
 
                      <div class="mb-3">
-                        <label for="Site Açıklaması" class="form-label">Branşı</label>
-                        <?php  
-
-                
-
-                  $teacherReq=$db->prepare("SELECT * from teachkategori WHERE teacher_ust=:teacher_ust");
-                  $teacherReq->execute(array(
-                    "teacher_ust" => 0
-                  ));
-
-                    ?>
-                    <select class="select2_multiple form-control" required="" name="teach_id" >
-
-
-                     <?php 
-
-                     while($teacherGet=$teacherReq->fetch(PDO::FETCH_ASSOC)) {
-
-                       $teach_id =$teacherGet['teach_id'];
-
-                       ?>
-
-                       <option  value="<?php echo $teacherGet['teach_id']; ?>"><?php echo $teacherGet['teach_ad']; ?></option>
-
-                       <?php } ?>
-
-                     </select>
+                        <label for="Site Açıklaması" class="form-label">Adres</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1" value="<?php echo $transportGet["adres"]; ?>" name="adres" placeholder="Adres">
                      </div>
 
-                    
+                     <div class="mb-3">
+                        <label for="Site Anahtar Kelime" class="form-label">Ulaşım İZBAN ile</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1" value="<?php echo $transportGet["ulasim_izban"]; ?>" name="ulasim_izban" placeholder="Ulaşım İZBAN ile">
+                     </div>
+
+                     <div class="mb-3">
+                        <label for="Site Yazar" class="form-label">İl/İlçe</label>
+                        <input type="text" class="form-control"  id="exampleFormControlInput1" value="<?php echo $transportGet["il"]; ?>" name="il" >
+                     </div>
 
                      
-                     <button class="mb-3 btn btn-success btn-lg" name="teacherAdd">Kaydet</button>
+                     <button class="mb-3 btn btn-primary" name="usTransportUpdate">Güncelle</button>
                      </div>
             </form>
 

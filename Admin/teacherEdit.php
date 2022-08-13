@@ -109,7 +109,7 @@ $teachGet=$teachReq->fetch(PDO::FETCH_ASSOC);
                      </div>
 
                      <div class="mb-3">
-                        <label for="Site Açıklaması" class="form-label">Yetki (Müdür Yard. , Müdür, vs...)</label>
+                        <label for="Site Açıklaması" class="form-label">Branşı</label>
                         <?php  
 
                     $teacher_id = $teachGet["teach_id"];

@@ -545,6 +545,132 @@ if(isset($_POST["newsUpdate"])){
 
      }
 
+     /*Okulumuz Güncellemeler */
+     /*------------------------------------------------------------------------------------ */
+
+     if(isset($_POST["usSchoolUpdate"])){
+        $usSchool=$db->prepare("UPDATE usSchool SET 
+            vizyon=:vizyon,
+            misyon=:misyon,
+            saatler=:saatler,
+            isinma=:isinma,
+            internet=:internet
+        WHERE school_id = 1 ");
+
+        $update=$usSchool->execute(array(
+          "vizyon" => $_POST["vizyon"],
+          "misyon" => $_POST["misyon"],
+          "saatler" => $_POST["saatler"],
+          "isinma" => $_POST["isinma"],
+          "internet" => $_POST["internet"],
+        ));
+
+      if($update){
+        Header("Location:usSchool.php?status=ok");
+        exit;
+        
+      }else{
+        Header("Location:usSchool.php?status=no");
+        exit;
+      }
+     }
+
+
+     if(isset($_POST["usContactUpdate"])){
+      $contact=$db->prepare("UPDATE uscontact SET
+      telefon=:telefon,
+      belge=:belge,
+      eposta=:eposta,
+      web=:web,
+      adres=:adres
+      WHERE contact_id = 1");
+
+      $update=$contact->execute(array(
+        "telefon" => $_POST["telefon"],
+        "belge" => $_POST["belge"],
+        "eposta" => $_POST["eposta"],
+        "web" => $_POST["web"],
+        "adres" => $_POST["adres"]
+      ));
+
+      if($update){
+        Header("Location:usContact.php?status=okay");
+        exit;
+
+      }else{
+
+        Header("Location:usContact.php?status=no");
+        exit;
+      }
+
+     }
+
+     if(isset($_POST["usStatusUpdate"])){
+      $status=$db->prepare("UPDATE usstatus SET
+      ogretmen=:ogretmen,
+      cok_amacli=:cok_amacli,
+      fizik=:fizik,
+      yemekhane=:yemekhane,
+      ogrenci=:ogrenci,
+      mesleki=:mesleki,
+      kutuphane=:kutuphane,
+      derslik=:derslik,
+      kimya=:kimya,
+      kitap=:kitap
+
+      WHERE status_id = 1");
+
+      $update=$status->execute(array(
+        "ogretmen" => $_POST["ogretmen"],
+        "cok_amacli" => $_POST["cok_amacli"],
+        "fizik" => $_POST["fizik"],
+        "yemekhane" => $_POST["yemekhane"],
+        "ogrenci" => $_POST["ogrenci"],
+        "mesleki" => $_POST["mesleki"],
+        "kutuphane" => $_POST["kutuphane"],
+        "derslik" => $_POST["derslik"],
+        "kimya" => $_POST["kimya"],
+        "kitap" => $_POST["kitap"]
+      ));
+
+      if($update){
+        Header("Location:usStatus.php?status=okay");
+        exit;
+
+      }else{
+        Header("Location:usStatus.php?status=no");
+        exit;
+      }
+
+     }
+
+     if(isset($_POST["usTransportUpdate"])){
+      $transport=$db->prepare("UPDATE ustransport SET 
+      yerlesim=:yerlesim,
+      adres=:adres,
+      ulasim_izban=:ulasim_izban,
+      il=:il
+      WHERE transport_id = 1");
+
+      $update=$transport->execute(array(
+        "yerlesim" => $_POST["yerlesim"],
+        "adres" => $_POST["adres"],
+        "ulasim_izban" => $_POST["ulasim_izban"],
+        "il" => $_POST["il"]
+      ));
+
+      if($update){
+        Header("Location:usTransport.php?status=okay");
+        exit;
+
+      }else{
+        Header("Location:usTransport.php?status=no");
+        exit;
+      }
+
+
+     }
+
 ?>
 
 

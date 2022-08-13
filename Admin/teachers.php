@@ -109,7 +109,7 @@ $teacherReq->execute();
                 <tr>
                   <td width="20" ><?php echo $say; ?></td>
                   <td><?php echo $teacherGet['teacher_name'] ?></td>
-                  <td><?php echo $teacherGet['teach'] ?></td>
+                  
                   
                   
                   <td><a href="teacherEdit.php?teacher_id=<?php echo $teacherGet["teacher_id"]; ?>"><button class="btn btn-primary">Düzenle</button></a></td>

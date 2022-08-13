@@ -1,33 +1,3 @@
-<?php
-include "../Admin/connect.php";
-
-$status=$db->prepare("SELECT * FROM usstatus");
-$status->execute();
-
-$statusGet=$status->fetch(PDO::FETCH_ASSOC);
-
-
-
-$school=$db->prepare("SELECT * FROM usschool");
-$school->execute();
-
-$schoolGet=$school->fetch(PDO::FETCH_ASSOC);
-
-
-$contact=$db->prepare("SELECT * FROM uscontact");
-$contact->execute();
-
-$contactGet=$contact->fetch(PDO::FETCH_ASSOC);
-
-
-
-$transport=$db->prepare("SELECT * FROM ustransport");
-$transport->execute();
-
-$transportGet=$transport->fetch(PDO::FETCH_ASSOC);
-?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -125,63 +95,15 @@ $transportGet=$transport->fetch(PDO::FETCH_ASSOC);
         </div>
     </nav>
 
-    <div class="header-okulumuz">
+      
+    <div class="header-mudur">
         <div class="header-container">
             <div class="container">
-                    <div class="baslik"><h1>Buca Necla - Tevfik Karadavut Mesleki ve Teknik Anadolu Lisesi</h1></div>
-                    <div class="img">
-                        <img src="../images/okulumuz.jpg" alt="">
-                    </div>
-                        
-                    <ul class="okul-nav">
-                        <li><a href="" id="school"> Okulumuz </a></li>
-                        <div class="okul-table ">
-                            <li><strong>Vizyon: </strong><?php echo $schoolGet["vizyon"] ?></li>
-                            <li><strong>Misyon: </strong><?php echo $schoolGet["misyon"] ?></li>
-                            <li><strong>Saatler: </strong><?php echo $schoolGet["saatler"] ?></li>
-                            <li><strong>Isınma: </strong><?php echo $schoolGet["isinma"] ?></li>
-                            <li><strong>İnternet Bağlantısır: </strong><?php echo $schoolGet["internet"] ?></li>
-                        </div>
-
-                        <div class="contact-table d-none">
-                            <li><strong><i class="fa-solid fa-phone-flip"></i> &nbsp; Telefon: </strong>  <?php echo $contactGet["telefon"] ?></li>
-                            <li><strong><i class="fa-solid fa-print"></i> &nbsp; Belge geçer: </strong><?php echo $contactGet["belge"] ?></li>
-                            <li><strong><i class="fa-solid fa-envelope-open-text"></i> &nbsp; Eposta: </strong><a href="#"><?php echo $contactGet["eposta"] ?></a></li>
-                            <li><strong><i class="fa-solid fa-globe"></i> &nbsp; WEB: </strong><a href="#"><?php echo $contactGet["web"] ?></a></li>
-                            <li><strong><i class="fa-solid fa-location-dot"></i> &nbsp; Adres: </strong><?php echo $contactGet["adres"] ?></li>
-                        </div>
-
-                        <div class="mevcut-durum  d-none">
-
-                       
-
-                            <li><strong><i class="fa-solid fa-chalkboard-user"></i>&nbsp; Öğretmen: <?php echo $statusGet["ogretmen"] ?></strong></li>
-                            <li><strong><i class="fa-solid fa-graduation-cap"></i>&nbsp; Öğrenci: <?php echo $statusGet["ogrenci"] ?></strong></li>
-                            <li><strong><i class="fa fa-building"></i>&nbsp; Derslik: <?php echo $statusGet["derslik"] ?></strong></li>
-                            <li><strong><i class="fa-solid fa-microphone"></i>&nbsp; Çok Amaçlı Salon: <?php echo $statusGet["cok_amacli"] ?></strong></li>
-                            <li><strong><i class="fa-brands fa-intercom"></i>&nbsp; Mesleki Uygulama Labaratuvarı: <?php echo $statusGet["mesleki"] ?></strong></li>
-                            <li><strong><i class="fa-solid fa-flask"></i>&nbsp; Kimya Labaratuvarı: <?php echo $statusGet["kimya"] ?></strong></li>
-                            <li><strong><i class="fa-solid fa-flask"></i></i>&nbsp; Fizik Labaratuvarı: <?php echo $statusGet["fizik"] ?></strong></li>
-                            <li><strong><i class="fa-solid fa-book-open-reader"></i>&nbsp; Kütüphane: <?php echo $statusGet["kutuphane"] ?></strong></li>
-                            <li><strong><i class="fa-solid fa-book-blank"></i>&nbsp; Kütüphane Kitap Sayısı: <?php echo $statusGet["kitap"] ?></strong></li>
-                            <li><strong><i class="fa-solid fa-utensils"></i>&nbsp; Yemekhane: <?php echo $statusGet["yemekhane"] ?></strong></li>
-                        </div>
-
-                        <div class="ulasim d-none">
-                            <li><strong><i class="fa-solid fa-location-dot"></i>&nbsp; Yerleşim Yeri - <?php echo $transportGet["yerlesim"] ?></strong></li>
-                            <li><strong><i class="fa-solid fa-location-dot"></i>&nbsp; Adres - <?php echo $transportGet["adres"] ?></strong></li>
-                            <li><strong><i class="fa-solid fa-train-subway"></i>&nbsp; Ulaşım İZBAN ile : <?php echo $transportGet["ulasim_izban"] ?></strong></li>
-                            <li><strong><i class="fa-solid fa-map-pin"></i>&nbsp; İl/İlçe <?php echo $transportGet["il"] ?></strong></li>
-                        </div>
-
-                        <li><a href="" id="contact">İletişim</a></li>
-                        <li><a href="" id="mevcut">Mevcut Durum</a></li>
-                        <li><a href="" id="ulasim"> Ulaşım</a></li>
-                    </ul>
-
-                </div>
+                <div class="image"><img src="/images/" alt=""></div>
+                <h1 class="baslik">Haci Murat ÖZKILINÇ - Okul Müdürü</h1>
             </div>
         </div>
+    </div>
 
 
         <div class="footer">
@@ -220,8 +142,8 @@ $transportGet=$transport->fetch(PDO::FETCH_ASSOC);
                 <div class="footer-info">
                     MEB © - Tüm Hakları Saklıdır. Gizlilik, Kullanım ve Telif Hakları bildiriminde belirtilen kurallar çerçevesinde hizmet sunulmaktadır.
                 </div>
-                <script src="../index.js" charset="utf-8"></script>
                 <script src="../app.js" charset="utf-8"></script>
 
-    </body>
+
+</body>
 </html>

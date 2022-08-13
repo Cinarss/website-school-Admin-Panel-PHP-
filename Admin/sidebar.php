@@ -58,7 +58,15 @@ if($say==0){
                      </li>
                      
                      <li><a href="teachers.php"><i class="fa fa-clone yellow_color"></i> <span>Öğretmenler</span></a></li>
-                     <li><a href="charts.html"><i class="fa fa-bar-chart-o green_color"></i> <span>Charts</span></a></li>
+                     <li>
+                        <a href="#element" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-diamond purple_color"></i> <span>Okulumuz Hakkında</span></a>
+                        <ul class="collapse list-unstyled" id="element">
+                           <li><a href="usSchool.php">> <span>Okulumuz</span></a></li>
+                           <li><a href="usContact.php">> <span>İletişim</span></a></li>
+                           <li><a href="usStatus.php">> <span>Mevcut Durum</span></a></li>
+                           <li><a href="usTransport.php">> <span>Ulaşım<menu></menu></span></a></li>
+                        </ul>
+                     </li>
                      <li><a href="settings.html"><i class="fa fa-cog yellow_color"></i> <span>Settings</span></a></li>
                   </ul>
                </div>

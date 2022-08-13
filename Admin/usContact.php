@@ -2,12 +2,12 @@
 include "connect.php";
 
 
-// $newsReq=$db->prepare("SELECT * from news WHERE news_id=:id");
-// $newsReq->execute(array(
-//     "id" => $_GET["news_id"]
-// ));
+$contactReq=$db->prepare("SELECT * from uscontact WHERE contact_id=:id");
+$contactReq->execute(array(
+    "id" => 1
+));
 
-// $newsGet=$newsReq->fetch(PDO::FETCH_ASSOC);
+$contactGet=$contactReq->fetch(PDO::FETCH_ASSOC);
 
 
 ?>
@@ -91,50 +91,33 @@ include "connect.php";
                 
                <div class="container mt-5">
                 <form action="process.php" method="POST" enctype="multipart/form-data" >
-              
-
-
-              
-                    
+       
                      <div class="mb-3">
-                        <label for="Site Başlığı" class="form-label">İsim</label>
-                        <input type="text" class="form-control" id="exampleFormControlInput1"  name="teacher_name">
+                        <label for="Site Başlığı" class="form-label">Telefon</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1" value="<?php echo $contactGet["telefon"]; ?>" name="telefon" placeholder="telefon">
                      </div>
 
                      <div class="mb-3">
-                        <label for="Site Açıklaması" class="form-label">Branşı</label>
-                        <?php  
-
-                
-
-                  $teacherReq=$db->prepare("SELECT * from teachkategori WHERE teacher_ust=:teacher_ust");
-                  $teacherReq->execute(array(
-                    "teacher_ust" => 0
-                  ));
-
-                    ?>
-                    <select class="select2_multiple form-control" required="" name="teach_id" >
-
-
-                     <?php 
-
-                     while($teacherGet=$teacherReq->fetch(PDO::FETCH_ASSOC)) {
-
-                       $teach_id =$teacherGet['teach_id'];
-
-                       ?>
-
-                       <option  value="<?php echo $teacherGet['teach_id']; ?>"><?php echo $teacherGet['teach_ad']; ?></option>
-
-                       <?php } ?>
-
-                     </select>
+                        <label for="Site Açıklaması" class="form-label">Belge (faks)</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1" value="<?php echo $contactGet["belge"]; ?>" name="belge" placeholder="belge">
                      </div>
 
-                    
+                     <div class="mb-3">
+                        <label for="Site Anahtar Kelime" class="form-label">E-posta</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1" value="<?php echo $contactGet["eposta"]; ?>" name="eposta" placeholder="eposta">
+                     </div>
 
-                     
-                     <button class="mb-3 btn btn-success btn-lg" name="teacherAdd">Kaydet</button>
+                     <div class="mb-3">
+                        <label for="Site Yazar" class="form-label">Web </label>
+                        <input type="text" class="form-control"  id="exampleFormControlInput1" value="<?php echo $contactGet["web"]; ?>" name="web" >
+                     </div>
+
+                     <div class="mb-3">
+                        <label for="Site Yazar" class="form-label">Adres</label>
+                        <input type="text" class="form-control"  id="exampleFormControlInput1" value="<?php echo $contactGet["adres"]; ?>" name="adres" >
+                     </div>
+
+                     <button class="mb-3 btn btn-primary" name="usContactUpdate">Güncelle</button>
                      </div>
             </form>
 
