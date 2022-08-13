@@ -1,3 +1,14 @@
+
+<?php
+include "../../Admin/connect.php";
+
+$teacherReq=$db->prepare("SELECT * from teacher WHERE teach_id=:id");
+$teacherReq->execute(array(
+    "id" => 14 
+));
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -100,8 +111,14 @@
             <div class="container">
                 <h1>Bilişim Tek. Alanı Öğretmenleri</h1>
                 <ul>
-                    <a href=""><li>Neslihan İpek</li></a>
-                    <a href=""><li>Selma Tetik</li></a>
+                    <?php
+                    
+                        while($teacherGet=$teacherReq->fetch(PDO::FETCH_ASSOC)) { ?>
+
+                    <a href=""><li><?php echo $teacherGet["teacher_name"]; ?></li></a>
+
+                    <?php } ?>
+                    <!-- <a href=""><li>Selma Tetik</li></a>
                     <a href=""><li>Gürkan Eren</li></a>
                     <a href=""><li>Murat Ergen</li></a>
                     <a href=""><li>Sercen Ersoy</li></a>
@@ -109,8 +126,8 @@
                     <a href=""><li>Mehmey Kutlu</li></a>
                     <a href=""><li>Fatih Akgün</li></a>
                     <a href=""><li>Abdülmuttalip Yüksel</li></a>
-                    <a href=""><li>Barış Altunay</li></a>
-                </ul>
+                    <a href=""><li>Barış Altunay</li></a>-->
+                </ul> 
             </div>
         </div>
     </div>

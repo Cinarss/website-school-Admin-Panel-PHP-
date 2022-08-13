@@ -139,9 +139,9 @@ $teachGet=$teachReq->fetch(PDO::FETCH_ASSOC);
                      </div>
 
                     
-
+                     <input type="hidden" name="teacher_id" value="<?php echo $teachGet['teacher_id'] ?>"> 
                      
-                     <button class="mb-3 btn btn-success btn-lg" name="teacherUpdate">Kaydet</button>
+                     <button class="mb-3 btn btn-success btn-lg" name="teacherUpdate">Güncelle</button>
                      </div>
             </form>
 
